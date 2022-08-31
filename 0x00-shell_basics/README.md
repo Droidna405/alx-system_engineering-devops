@@ -1,7 +1,7 @@
 # Scripts Project
 ## Tasks Involved
-0. Where am I
-1. What's in there
+0. Where am I - (0-current_working_directory)"prints the absolute path name of the current working directory"
+1. What's in there - (1-listit)"Display the contents list of your current directory"
 2. There's no place like home
 3. The long format
 4. Hidden files
