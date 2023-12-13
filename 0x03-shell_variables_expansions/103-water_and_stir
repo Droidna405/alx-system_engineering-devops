@@ -1,2 +1,2 @@
 #!/bin/bash
-echo $(printf %02o $((5#$(echo "$WATER" | tr 'water' '01234')) + 8#$(echo "$STIR" | tr 'stir' '0123456 ')) ) | tr '01234567' 'bestchol'
+echo -n $(printf %o $((5#$(echo "$WATER" | tr 'water' '01234')) + 8#$(echo "$STIR" | tr 'stir' '01234567'))) | tr -d '0' | tr -cd 'bestchol' | head -c 2
