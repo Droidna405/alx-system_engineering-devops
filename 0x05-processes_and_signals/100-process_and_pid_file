@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Trap signals and define signal handlers
+trap 'echo "Y U no love me?!"' SIGINT
+trap 'echo "I hate the kill command"; exit' SIGTERM SIGQUIT
+# Write the PID to the pid file and run the loop
+echo $$ > /var/run/myscript.pid
+while :; do echo "To infinity and beyond"; sleep 1; done
