@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Trap SIGTERM signal and define signal handler
+trap 'echo "I am invincible!!!"' SIGTERM
+# Run the loop with sleep 2 between iterations
+while true; do
+    echo "To infinity and beyond"
+        sleep 2
+	done
+	
