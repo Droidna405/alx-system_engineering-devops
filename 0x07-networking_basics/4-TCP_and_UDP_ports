@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Get listening ports using netstat,
+# filter for listening sockets, and extract relevant information
+echo "Active Internet connections (only servers)"
+echo "Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name"
+# Display listening TCP ports with PID and program name
+netstat -tln | awk '$1 ~ /^tcp/ && $NF ~ /^[0-9]+/ {print $1, $4, $7}' | while read -r proto local_addr pid_program; do
+    pid=$(echo "$pid_program" | cut -d/ -f1)
+    program=$(echo "$pid_program" | cut -d/ -f2-)
+    echo "$proto       -      -    $local_addr          -                   LISTEN      $pid/$program"
+done
+# Display listening UDP ports with PID and program name
+netstat -uln | awk '$1 ~ /^udp/ && $NF ~ /^[0-9]+/ {print $1, $4, $7}' | while read -r proto local_addr pid_program; do
+    pid=$(echo "$pid_program" | cut -d/ -f1)
+    program=$(echo "$pid_program" | cut -d/ -f2-)
+    echo "$proto       -      -    $local_addr          -                   -           $pid/$program"
+done
