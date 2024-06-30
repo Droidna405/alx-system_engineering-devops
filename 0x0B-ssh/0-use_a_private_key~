@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Ensure the script takes exactly one argument: the server IP or hostname
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <server_ip_or_hostname>"
+        exit 1
+	fi
+
+# Server address from the first argument
+SERVER=$1
+
+# Private key location
+KEY=~/.ssh/school
+
+# SSH command with single-character flags
+ssh -i $KEY -o "StrictHostKeyChecking=no" ubuntu@$SERVER
