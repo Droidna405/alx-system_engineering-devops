@@ -1,0 +1,2 @@
+# What happens when you type google.com in your browser and press Enter
+## Here's the link to the post <https://www.linkedin.com/posts/joel-mwangala-0715b884_dns-tcpip-firewall-activity-7219767641442312193-V5MO?utm_source=share&utm_medium=member_desktop>
