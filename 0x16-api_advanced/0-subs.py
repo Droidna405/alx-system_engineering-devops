@@ -5,7 +5,6 @@ REDDIT API and returns the number of subscribers
 for a given subreddit
 """
 
-import sys
 import requests
 
 
