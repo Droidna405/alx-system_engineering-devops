@@ -4,7 +4,6 @@ This module defines 'number_of_subscribers' that queries the
 REDDIT API and returns the number of subscribers
 for a given subreddit
 """
-
 import requests
 
 
@@ -17,15 +16,10 @@ def number_of_subscribers(subreddit):
         int: The number of subscribers, or 0 if the subreddit
              doesn't exist.
     """
-
+    headers = {"User-Agent": "JmRedditSubBot/0.1"}
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
-
-    headers = {"User-Agent": "JmRedditBot/0.1"}
-
     response = requests.get(url, headers=headers, allow_redirects=False)
-
-    if response.status_code == 200:
-        data = response.json()
-        return data['data']['subscribers']
-    else:
+    if response.status_code != 200:
         return 0
+    subs = response.json().get("data").get("subscribers")
+    return subs
