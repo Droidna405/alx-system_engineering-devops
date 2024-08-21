@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# Install Nginx and configure redirection from /redirect_me to another page
+
+# Update package list
+apt-get -y update
+
+# Install Nginx if not already installed
+apt-get -y install nginx
+
+# Configure redirection
+NGINX_CONF="/etc/nginx/sites-available/default"
+
+# Backup existing configuration
+cp "$NGINX_CONF" "${NGINX_CONF}.bak"
+
+# Update Nginx configuration for redirection
+sed -i '/server_name _;/a \    location /redirect_me {\n        return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n    }' "$NGINX_CONF"
+
+# Ensure that the default site is enabled
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
+
+# Test Nginx configuration for syntax errors
+nginx -t
+
+# Reload Nginx to apply changes
+nginx -s reload
