@@ -1,22 +1,5 @@
-# Define a file resource to set permissions for WordPress
-file { '/var/www/html/wordpress':
-  ensure => directory,
-  owner  => 'www-data',
-  group  => 'www-data',
-  mode   => '0755',
-}
 
-# Ensure Apache can read the WordPress files
-file { '/var/www/html/wordpress/wp-config.php':
-  ensure => file,
-  owner  => 'www-data',
-  group  => 'www-data',
-  mode   => '0644',
-}
-
-# Restart Apache to apply changes
-exec { 'restart_apache':
-  command     => '/usr/sbin/service apache2 restart',
-  refreshonly => true,
-  subscribe   => File['/var/www/html/wordpress/wp-config.php'],
+exec { 'Fix wordpress':
+  command  => 'sudo sed -i "s/.phpp/.php/" /var/www/html/wp-settings.php',
+  provider => shell,
 }
