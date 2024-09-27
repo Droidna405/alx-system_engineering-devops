@@ -1,0 +1,26 @@
+server {
+    listen 80;
+    server_name 18.234.107.143;
+
+    location /airbnb-dynamic/ {
+        proxy_pass http://127.0.0.1:5000;  # Change the port if your app is running on a different port
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    location / {
+        try_files $uri $uri/ =404;  # Serve static files or return 404
+    }
+
+    error_page 404 /404.html;  # Customize your 404 error page
+    location = /404.html {
+        internal;  # Prevent direct access to the 404 page
+    }
+
+    error_page 500 502 503 504 /50x.html;  # Custom error page for server errors
+    location = /50x.html {
+        internal;
+    }
+}
